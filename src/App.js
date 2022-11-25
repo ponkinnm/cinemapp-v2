@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Welcome from "./Welcome";
+import Layout from "./pages/Layout";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Test from "./pages/Test";
 
 function App() {
   return (
-    <div className="App">
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<Layout />}>
+                  <Route index element={<Welcome />} />
+
+{/*
+                  <Route path="*" element={<NoPage />} />
+*/}
+              </Route>
+              <Route path="test" element={<Test />} />
+          </Routes>
+      </BrowserRouter>
+    /*<div className="App">
+
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          hello world
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
-    </div>
+        <Welcome hej={"amdkmk"}/>
+    </div>*/
   );
 }
 
