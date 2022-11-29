@@ -3,6 +3,7 @@ import Welcome from "./Welcome";
 import Layout from "./pages/Layout";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Test from "./pages/Test";
+import GamePresenter from "./presenters/GamePresenter";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Layout />}>
                   <Route index element={<Welcome />} />
+                  <Route path="game" element={<GamePresenter />}/>
 
 {/*
                   <Route path="*" element={<NoPage />} />

@@ -14,8 +14,16 @@ function Question({quote, movies}) {
             </div>);
     }
 
-    function handleAnswerACB(){
-        //const input = document.querySelectorAll('input');
+    function handleAnswerACB(e) {
+        e.preventDefault();
+        const input = document.querySelectorAll('input');
+        input.forEach(e => {
+            if (e.checked === true) console.log(e.value)
+        })
+
+        console.log(document.querySelector('form'));
+
+        //onAnswer(input)
     }
 
     return (<div>
