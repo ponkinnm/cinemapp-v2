@@ -4,6 +4,11 @@ import Question from "../pages/gameplay/Question";
 function GamePresenter(props) {
     const hardQuote = "Say hello to my little friend";
     const movies = ["Die Hard", "Scarface", "Harry Potter and The Philosophers stone"]
+    const movies2 = [
+            {id: 1, title: "Die Hard"},
+            {id: 2, title: "Scarface"},
+            {id: 3, title: "Harry Potter and The Philosophers stone"},
+    ]
     function checkAnswer(id){
         // props.model.xxxxx(id)
     }
@@ -12,7 +17,7 @@ function GamePresenter(props) {
         <div>
             <Question
                 quote={hardQuote}
-                answer={checkAnswer}
+                onAnswer={checkAnswer}
                 movies={movies}
             />
         </div>
