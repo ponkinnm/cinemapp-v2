@@ -12,7 +12,6 @@ function App() {
               <Route path="/" element={<Layout />}>
                   <Route index element={<Welcome />} />
                   <Route path="game" element={<GamePresenter />}/>
-
 {/*
                   <Route path="*" element={<NoPage />} />
 */}
