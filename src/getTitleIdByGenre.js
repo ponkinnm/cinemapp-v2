@@ -1,46 +1,33 @@
-import {useState, useEffect} from "react";
+import {API_KEY, BASE_URL} from "./apiConfig";
+
 /**
-Function to get titleid based of chosen genre
-NoPage is done yet.
-Funtion is working just call with a valid genre.
-Could be improved by saving the whole array of titles if game should continue in same genre.
- * */
-export default function GetTitleIdByGenre(chosenGenre) {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const URL = 'https://imdb8.p.rapidapi.com/title/v2/get-popular-movies-by-genre?genre=';
+ * Return array of title IDs of a chosen genre.
+ *
+ * @param chosenGenre genre, e.g. "horror"
+ * @param noOfTitles how many titles to retrieve from API. Default: 100
+ * @returns {Promise<*>} Promise that resolves to array of titleIDs, e.g. tt9114286
+ */
+
+export default function getTitleIdByGenre(chosenGenre = 'action', noOfTitles = 100) {
+
+    const endpoint = '/title/v2/get-popular-movies-by-genre?';
     const options = {
-        method: 'GET',
-        headers: {'X-RapidAPI-Key': '', 'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'}
+        method: 'GET', headers: {'X-RapidAPI-Key': API_KEY, 'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'}
     };
-    //gets one random title from the list of movies
-    function getTitleID(titles){
-        let index = Math.floor(Math.random() * titles.length);
-        const title = titles[index].split('/')[2];
-        return title;
+
+    function isolateIdCB(titleAndId) {
+        return titleAndId.split("/")[2];
     }
-    useEffect(() => {
-        const getData = async() =>{
-            try {
-                const response = await fetch(
-                    URL + chosenGenre + '&limit=100', options)
-                //.then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        `This is a HTTP error: Status is ${response.status}`);
-                }
-                let actualData = await response.json();
-                setData(getTitleID(actualData));
-                setError(null);
-            }   catch (err) {
-                setError(err.message);
-                setData(null);
-                console.log(error);
-            }
-        }
-        getData()
-    }, []);
-    //console.log tester to se that it is working
-    console.log(data);
-    return data;
+
+    const searchParams = {
+        limit: noOfTitles, genre: chosenGenre,
+    }
+
+    try {
+        return fetch(BASE_URL + endpoint + new URLSearchParams(searchParams), options)
+            .then((res) => res.json())
+            .then((arr => arr.map(isolateIdCB)));
+    } catch (err) {
+        console.error(err);
+    }
 }
