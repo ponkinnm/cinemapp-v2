@@ -44,7 +44,6 @@ function AuthPresenter() {
             .catch(err => {
                 console.log(err.message)
             })
-        return result
     }
 
     function writeUserToDatabase(displayName, email) {
