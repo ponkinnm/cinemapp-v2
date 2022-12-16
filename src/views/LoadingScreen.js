@@ -1,4 +1,4 @@
-import stanley from "./img/kubrick.jpg"
+import stanley from "../img/kubrick.jpg"
 
 export default function LoadingScreen(){
     return <div>

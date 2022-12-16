@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {createMovieQuoteGenerator} from "../../utilities";
+import {createMovieQuoteGenerator} from "../../util/utilities";
 
 const initialState = {
     // userId: '',

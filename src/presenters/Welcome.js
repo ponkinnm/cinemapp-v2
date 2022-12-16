@@ -1,7 +1,7 @@
 import React  from 'react';
-import ingrid from "./img/bergman - intermezzo.jpg"
-import AuthPresenter from "./presenters/AuthPresenter";
-import {selectUser} from "./features/auth/authSlice";
+import ingrid from "../img/bergman - intermezzo.jpg"
+import AuthPresenter from "./AuthPresenter";
+import {selectUser} from "../features/auth/authSlice";
 import {useSelector} from "react-redux";
 
 function Welcome() {

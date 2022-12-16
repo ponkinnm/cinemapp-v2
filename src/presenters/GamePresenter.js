@@ -4,12 +4,12 @@
  */
 import React, {useState} from 'react';
 import Question from "../pages/gameplay/Question";
-import {fetchAllMoviesQ, fetchArrayOfTitleIdsByGenre} from "../movieSource";
-import {createMovieQuoteGenerator, createGame} from "../utilities";
-import {QUOTE, QUOTE2, QUOTE3} from "../filmConsts";
+import {fetchAllMoviesQ, fetchArrayOfTitleIdsByGenre} from "../util/movieSource";
+import {createMovieQuoteGenerator, createGame} from "../util/utilities";
+import {QUOTE, QUOTE2, QUOTE3} from "../util/filmConsts";
 import QuoteBox from "../pages/gameplay/QuoteBox";
 import {CorrectResultBox, BadResultBox} from "../pages/gameplay/ResultBox";
-import LoadingScreen from '../LoadingScreen'
+import LoadingScreen from '../views/LoadingScreen'
 
 function GamePresenter(props) {
     const [answerId, setAnswerId] = React.useState({})

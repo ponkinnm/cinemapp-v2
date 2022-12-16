@@ -3,7 +3,7 @@
  * @fileoverview    TODO (to write)
  * TODO rewrite genre fetch as an async
  */
-import {BASE_URL, API_KEY} from "./apiConfig";
+import {BASE_URL, API_KEY} from "../apiConfig";
 import {createMovieQuoteGenerator} from "./utilities";
 
 const options = {

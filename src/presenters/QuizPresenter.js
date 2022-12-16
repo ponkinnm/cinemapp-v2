@@ -1,7 +1,7 @@
 import GamePresenter from './GamePresenter'
 import GenrePickerView from "../GenrePickerView.js";
 import React, {useState, useEffect} from 'react'
-import {GENRE} from "../filmConsts.js";
+import {GENRE} from "../util/filmConsts.js";
 
 export default function QuizPresenter(){
     const [genre, setGenre] = useState(null)

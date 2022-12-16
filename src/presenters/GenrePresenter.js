@@ -1,7 +1,7 @@
 import QuotePresenter from "./QuotePresenter"; // TODO: Move this file to pages
 import GenrePickerView from "../GenrePickerView.js"; // TODO: Move this file to pages
 import React, {useState, useEffect} from 'react'
-import {GENRE} from "../filmConsts.js";
+import {GENRE} from "../util/filmConsts.js";
 import {useDispatch} from "react-redux";
 import {fetchTitleIdsByGenre} from "../features/game/gameApiActions";
 

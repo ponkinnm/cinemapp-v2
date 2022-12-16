@@ -6,9 +6,9 @@
 import React, {useState} from 'react'
 import Question from "../pages/gameplay/Question";
 import QuoteBox from "../pages/gameplay/QuoteBox";
-import LoadingScreen from '../LoadingScreen' // TODO should component/file be moved to /pages/gameplay/ ??
+import LoadingScreen from '../views/LoadingScreen' // TODO should component/file be moved to /pages/gameplay/ ??
 import {CorrectResultBox, BadResultBox} from "../pages/gameplay/ResultBox"; // TODO Shouldn't it be one file per component?
-import {QUOTE, QUOTE2, QUOTE3, GENRE} from "../filmConsts";
+import {QUOTE, QUOTE2, QUOTE3, GENRE} from "../util/filmConsts";
 import {useDispatch} from "react-redux";
 
 const QuotePresenter = () => {

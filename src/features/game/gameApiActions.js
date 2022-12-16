@@ -1,7 +1,7 @@
 import {gameActions} from "./gameSlice";
-import {BASE_URL, API_KEY} from "./apiConfig";
-import {TITLEIDS} from "../../filmConsts";
-import {createMovieQuoteGenerator} from "../../utilities";
+import {BASE_URL, API_KEY} from "../../apiConfig";
+import {TITLEIDS} from "../../util/filmConsts";
+import {createMovieQuoteGenerator} from "../../util/utilities";
 
 const options = {
     method: 'GET',
