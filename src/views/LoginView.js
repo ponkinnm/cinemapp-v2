@@ -12,7 +12,7 @@ function LoginView({error, handleSubmit, setHasAccount}) {
             <h2 className="mb-3">Login</h2>
 
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={() => handleSubmit(email, password)}>
+            <Form onSubmit={(e) => {e.preventDefault(); handleSubmit(email, password)}}>
                 <FloatingLabel label="Email" className="mb-3" controlId="formBasicEmail">
                     <Form.Control
                         required
