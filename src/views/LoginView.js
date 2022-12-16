@@ -1,43 +1,18 @@
 import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {useUserAuth} from "../context/UserAuthContext";
 import {Alert, Button, Form} from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-//TODO: Button Register new user dont work after implementing authPresenter.
-//TODO: If you use setHasAccount it doesn't work at all. Navigate to signup page gives
-//TODO: an 404 error but then you get to right view.
-function LoginView(setHasAccount) {
+function LoginView({error, handleSubmit, setHasAccount}) {
     const [email, setEmail] = useState("");
-    const [error, setError] = useState("");
     const [password, setPassword] = useState("");
-    const {logIn} = useUserAuth();
-    const navigate = useNavigate();
-    const navigateToGame = () => {
-        navigate('game');
-    };
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setError("");
-        try {
-            await logIn(email, password);
-            navigateToGame();
 
-        } catch (err) {
-            if (err.message.includes("password")) {
-                setError("Invalid password");
-            } else {
-                setError("Wrong email");
-            }
-        }
-    }
     return (
         <>
         <div className="p-4 box">
-            <h2 className="mb-3"></h2>
+            <h2 className="mb-3">Login</h2>
 
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleLogin}>
+            <Form onSubmit={() => handleSubmit(email, password)}>
                 <FloatingLabel label="Email" className="mb-3" controlId="formBasicEmail">
                     <Form.Control
                         required
@@ -56,7 +31,8 @@ function LoginView(setHasAccount) {
                 </FloatingLabel>
                 <div className="d-grid gap-2">
                     <Button variant="primary" type="Submit" size="lg" >Login</Button>
-                    <Button variant="secondary" size="lg" onClick={() => navigate('signup')}>Register new user</Button>
+                    <span className="text-muted small d-flex justify-content-center">Don't have an account?</span>
+                    <Button variant="secondary" className="btn-sm" size="lg" onClick={() => setHasAccount(false)}>Register new user</Button>
                 </div>
             </Form>
         </div>

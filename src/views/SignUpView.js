@@ -21,7 +21,7 @@ function SignUpView({error, handleSubmit, setHasAccount}) {
     return (
         <>
             <div className="p-4 box">
-                <h2 className="mb-3">Signup to CinemApp</h2>
+                <h2 className="mb-3">Signup</h2>
 
                 {error && <Alert variant="danger">{error}</Alert>}
 
