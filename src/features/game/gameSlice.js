@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {createMovieQuoteGenerator} from "../../util/utilities";
 
 const initialState = {
-    // userId: '',
-    // displayName: '',
-    // email:"", // ?
-
     set: 0,
     score: 0,
     totalScore:0,
@@ -86,7 +81,10 @@ const gameSlice = createSlice({
         },
         submitAnswer: (state,action) => {
             state.hasSubmittedAnswer = true
+            state.lines = []
             state.set++;
+            state.year = ""
+            state.characters = ""
 
             if (state.correctMovieId === action.payload) {
                 state.score += 10
