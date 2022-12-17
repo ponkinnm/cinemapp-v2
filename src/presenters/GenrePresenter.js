@@ -2,27 +2,56 @@ import QuotePresenter from "./QuotePresenter"; // TODO: Move this file to pages
 import GenrePickerView from "../views/GenrePickerView.js";
 import React, {useState, useEffect} from 'react'
 import {GENRE} from "../util/filmConsts.js";
+import {useGetMovieIdsByGenreQuery} from "../features/api/apiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {gameSliceAction, replaceMovieIds, replaceTitleIdList} from "../features/game/gameSlice";
 import {useDispatch} from "react-redux";
+import LoadingScreen from "../views/LoadingScreen";
 import {fetchTitleIdsByGenre} from "../features/game/gameApiActions";
+import GamePresenter from "./GamePresenter";
 
-export default function GenrePresenter(){
-    const [genre, setGenre] = useState(null)
-    const dispatch = useDispatch()
+export default function GenrePresenter() {
+    const LIMIT = 100
+    const [myGenre, setMyGenre] = useState(skipToken)
 
-    useEffect(() => {console.log(genre)})
-    function handleGenreChange(event){
-        setGenre(event.target.value)
-        fetchTitleIdsByGenre() // TODO: Add selected genre
+    // alt 1
+    function handleGenreChange(event) {
+        setMyGenre({
+            limit: LIMIT,
+            genre: event.target.value
+        })
     }
-    // function handleGenreChange(selectedGenre){
-    //     setGenre(selectedGenre)
-    //     fetchTitleIdsByGenre(selectedGenre) // TODO: Add selected genre
-    // }
-    //return {!genre && <GetTitlesFromGenre chooseGenre={(genre) => {setGenre(genre)}}}
+
+    const {
+        isLoading,
+        isFetching,
+        isSuccess,
+        isError,
+        error,
+    } = useGetMovieIdsByGenreQuery(myGenre)
+
+    useEffect(() => {
+            console.log("Effect running genre set up ")
+            return () => {
+                console.log("Effect clean up genre set up")
+            }
+        }, []
+    )
+
+    // TODO: create an error component?  Like LoadingScreen...
     return (
         <>
-            {!genre && <GenrePickerView setGenre={handleGenreChange} genres={GENRE}/>}
-            {genre && <QuotePresenter genre={genre}/>}
+            {isError
+                ? <div>{`Houston, we have a problem! Tell the newbies that the ${error.message.toString()}`}</div>
+                : (isLoading || isFetching)
+                    ? <LoadingScreen/>
+                    : isSuccess
+                        ? <GamePresenter/>
+                        : <GenrePickerView
+                            setGenre={handleGenreChange}
+                            genres={GENRE}
+                        />
+            }
         </>
     );
 }
