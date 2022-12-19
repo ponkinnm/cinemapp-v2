@@ -1,10 +1,18 @@
 import {Outlet, NavLink, Link} from "react-router-dom";
 import SignOutButton from "../SignOutButton";
-import {useSelector} from "react-redux";
-import {selectUser} from "../features/auth/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectUser, setUser} from "../features/auth/authSlice";
+import {useEffect} from "react";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebaseConfig";
 
 function Layout() {
     const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => dispatch(setUser(user?.toJSON())))
+    }, [])
 
     return (
 
