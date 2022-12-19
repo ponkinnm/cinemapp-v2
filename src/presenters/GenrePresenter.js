@@ -1,5 +1,5 @@
 import GenrePickerView from "../views/GenrePickerView.js";
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {GENRE} from "../util/filmConsts.js";
 import {useGetMovieIdsByGenreQuery} from "../features/api/apiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
@@ -31,11 +31,6 @@ export default function GenrePresenter() {
         error,
     } = useGetMovieIdsByGenreQuery(myGenre)
 
-    useEffect(() => {
-        console.log("Effect running genre set up ")
-        return () => {console.log("Effect clean up genre set up")}
-        }, []
-    )
     if (data && isInitial) {
         // TODO: fixed the problem with suboptimal solution (isInitial). Is there a better solution?
         dispatch(gameSliceAction.resetGame())

@@ -25,13 +25,12 @@ function AuthPresenter() {
                     checker = Object.keys(response.val()).length - 1;
                     response.forEach((child) => {
                         const user = child.val()
-                        console.log(user);
                         if (user.username === displayName) {
                             //ta bort skapad authentication
                             setError("Username already taken")
                             setHasAccount(null);
                             deleteCurrentUser();
-                            return Promise.reject(new Error)
+                            return Promise.reject(new Error())
                         } else if (!checker) {
                             return writeUserToDatabase(displayName, email)
                         }
@@ -40,7 +39,7 @@ function AuthPresenter() {
                 }
             })
             .catch(err => {
-                console.log(err.message)
+                //console.log(err.message)
             })
     }
 
@@ -59,7 +58,7 @@ function AuthPresenter() {
 
             if(passwordChecker !== password){
                 setError("password must be the same")
-                return Promise.reject(new Error)
+                return Promise.reject(new Error())
             }
             const user = await signUp(email, password, displayName);
             await checkIfUsernameAlreadyTaken(displayName, email)

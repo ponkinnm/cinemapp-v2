@@ -9,6 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {gameSliceAction} from "../features/game/gameSlice";
 import {fetchAndAddMoviesToStore} from "../features/game/gameApiActions";
 import {useNavigate} from "react-router-dom";
+import uploadScoreToFirebase from "../util/databaseFunctions";
+import {selectUser} from "../features/auth/authSlice";
 
 function GamePresenter() {
     const NUMBEROFMOVIES = 3
@@ -23,7 +25,8 @@ function GamePresenter() {
     const hasSubmittedAnswer = useSelector(state => state.game.hasSubmittedAnswer)
     const movieIds = useSelector(state => state.game.movieIds)
     const totalScore = useSelector(state => state.game.totalScore)
-    const newGame = (delay = 2000) => {setTimeout(gameSetUp, delay)}
+    const newGame = (delay = 2500) => {setTimeout(gameSetUp, delay)}
+    const user = useSelector(selectUser);
 
     const gameSetUp = useCallback(async () => {
         setIsLoading(true)
@@ -51,6 +54,7 @@ function GamePresenter() {
 
     function nextSetACB() {
         if (totalScore) {
+            uploadScoreToFirebase(user, totalScore);
             navigate('/highscore')
         } else {
             newGame()

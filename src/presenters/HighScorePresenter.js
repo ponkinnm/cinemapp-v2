@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from "react-redux";
-import {ref, push, onValue} from 'firebase/database'
+import {ref, onValue} from 'firebase/database'
 import {database} from "../firebaseConfig";
 import {useSelector} from "react-redux";
 import {selectUser} from "../features/auth/authSlice";
@@ -12,9 +12,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-function HighScorePresenter(props) {
+function HighScorePresenter() {
     const user = useSelector(selectUser);
-    console.log("rendering highscore presenter")
     const [dbRef, setDbRef] = useState(null);
     const [highscores, setHighscores] = useState([]);
 
@@ -28,23 +27,11 @@ function HighScorePresenter(props) {
         getHighScoreFromDb();
     }, [dbRef])
 
-    //function to call when push a new score to db
-    function updateDb(score) {
-        if (score === 0) {
-            return;
-        }
-        push(dbRef, score);
-        /*update(dbRef, {
-            highScore: [appendHighScore(score)]
-        }).catch(err => console.error(err));*/
-    }
-
     //Getter for highScore from logged in user
     async function getHighScoreFromDb() {
         if (dbRef) {
             onValue(dbRef, (response) => {
                 if (response.exists()) {
-                    console.log(Object.values(response.val()));
                     setHighscores([...new Set(Object.values(response.val()))].sort((a, b) => b - a).slice(0, 6));
                 }
             })

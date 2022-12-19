@@ -35,8 +35,10 @@ function Welcome() {
                     <Toast.Body >Hello, {user.displayName}! <br/>Welcome to this game where you shall guess the movie
                         from different quotes. <br/>
                     </Toast.Body>
-                        <StartButton/><br/>
-                        <ShowHighScoreButton/>
+                        <div className={"d-flex flex-column gap-2 p-4 justify-content-center"}>
+                            <StartButton/>
+                            <ShowHighScoreButton/>
+                        </div>
                 </Toast>
 
                 </ToastContainer>
