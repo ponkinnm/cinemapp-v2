@@ -100,6 +100,15 @@ img {
 
     .navigation {
         margin-bottom: 32px;
+        height: unset;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+    .main-content {
+        max-width: calc(100vw - 48px);
+        margin: 0 auto;
     }
 
     .page-welcome {
@@ -111,6 +120,6 @@ img {
     }
 
     .menu {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
