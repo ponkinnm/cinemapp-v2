@@ -1,6 +1,8 @@
-# CinemApp
-#### The no. 1 Movie Quiz
-#### By Fredrik Ehne, Vincent Ferrigan, Robert Furuvald & Pontus Kinnmark
+# CinemApp v2
+
+### v2 revision by Vincent Ferrigan & Pontus Kinnmark
+##### -- v1 By Fredrik Ehne, Vincent Ferrigan, Robert Furuvald & Pontus Kinnmark
+
 
 ### Description
 A online movie quiz app where you based on quotes from movies have to guess which movie from alternatives.
