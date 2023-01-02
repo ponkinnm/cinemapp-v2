@@ -8,13 +8,13 @@ import {database} from "../firebaseConfig";
 import {useDispatch} from "react-redux";
 import LoginView from "../views/LoginView";
 
+// TODO: Feedback from Edward "Some presenters issue persistence actions directly"
+// TODO: Firebase-Redux toolkit/box ThirdParty?
 function AuthPresenter() {
     const [hasAccount, setHasAccount] = useState(true);
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-
 
     async function checkIfUsernameAlreadyTaken(displayName, email) {
         const dbRef = (ref(database, 'users'));

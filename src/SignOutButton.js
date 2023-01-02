@@ -4,6 +4,7 @@
  *
  *
  */
+// TODO: Separate concerns. But does it have to be on it own?
 import './SignOutButton.css';
 import {useNavigate} from "react-router-dom";
 import {logOut, setUser} from "./features/auth/authSlice";

@@ -1,14 +1,13 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import './genre-picker.css'
 
 export default function GenrePickerView(props) {
-    function renderGenres(genre) {
+    function renderGenresCB(genre) {
         return (
             <Carousel.Item onClick={() => props.setGenre(genre.name)} key={genre.name}>
                 <Card className={"d-flex justify-content-center"}
@@ -44,7 +43,7 @@ export default function GenrePickerView(props) {
         <Container>
             <Carousel pause='hover' variant='dark' className='p-4 align-middle' id="genres">
 
-                {props.genres.map(renderGenres)}
+                {props.genres.map(renderGenresCB)}
 
             </Carousel>
         </Container>

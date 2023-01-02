@@ -5,10 +5,11 @@ import {useGetMovieIdsByGenreQuery} from "../features/api/apiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {gameSliceAction} from "../features/game/gameSlice";
 import {useDispatch} from "react-redux";
-import LoadingScreen from "../views/LoadingScreen";
+import LoadingScreenView from "../views/LoadingScreenView";
 import GamePresenter from "./GamePresenter";
 
-let isInitial = true
+// TODO CreateAction, extraReducers? Stream line
+let isInitial = true // Find a better solution
 export default function GenrePresenter() {
     const LIMIT = 100
     const [myGenre, setMyGenre] = useState(skipToken)
@@ -44,7 +45,7 @@ export default function GenrePresenter() {
             {isError
                 ? <div>{`Houston, we have a problem! Tell the newbies that the ${error.message.toString()}`}</div>
                 : (isLoading || isFetching)
-                    ? <LoadingScreen/>
+                    ? <LoadingScreenView/>
                     : data && isSuccess
                         ? <GamePresenter/>
                         : <GenrePickerView

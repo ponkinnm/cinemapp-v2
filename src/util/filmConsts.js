@@ -2,6 +2,7 @@ import harry from '../img/action.jpg'
 import comedy from '../img/comedy.jpg'
 import thriller from '../img/thriller.jpg';
 import drama from '../img/drama.jpg';
+// TODO Delete prior to deploy
 const USER = {
     "uid": "SG86a2mFHeb1H0GJXzdLXO6ogCi1",
     "email": "vincent.ferrigan@gmail.com",

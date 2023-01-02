@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Alert from 'react-bootstrap/Alert';
 import {mapStateToCorrectResultProps} from "../../features/game/gameMap";
 
+// TODO: It doesnt need to be on its own. Separate logic and merge with the rest (of the gameplay views)
 function CorrectResultBox(props) {
     return (
         <Alert variant ={'success'}>

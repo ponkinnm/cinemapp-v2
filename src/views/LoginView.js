@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Button, Form} from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
+// TODO: move state to AuthPresenter
 function LoginView({error, handleSubmit, setHasAccount}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

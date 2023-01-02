@@ -5,6 +5,7 @@ import {database} from "../firebaseConfig";
 import {useSelector} from "react-redux";
 import {selectUser} from "../features/auth/authSlice";
 
+// TODO: Separate concerns. Part view part preseneter.
 const mapStateToProps = (state) => {
     return {
         score: state.game.score,

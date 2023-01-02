@@ -7,6 +7,7 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../firebaseConfig";
 import {motion} from "framer-motion";
 
+// TODO: Review
 function Layout() {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();

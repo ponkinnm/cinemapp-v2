@@ -8,7 +8,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 // and then deletes the currentUser and shows a error message indicating
 // username already taken, maybe have one that checks this when typing the
 // username in realtime
-//Todo: Error handling when username is taken did not work, tried many things
+// Todo: Error handling when username is taken did not work, tried many things
+// TODO: Move state to AuthPresenter
 function SignUpView({error, handleSubmit, setHasAccount}) {
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
