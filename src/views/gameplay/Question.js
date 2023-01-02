@@ -2,9 +2,10 @@ import React from 'react';
 import {Button, Stack} from 'react-bootstrap';
 import './question.css';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import * as events from "events";
 import {mapDispatchToQuestionProps, mapStateToQuestionProps} from "../../features/game/gameMap";
 import {connect} from "react-redux";
+
+// TODO move connect to a presenter or merge with the rest of the gameplay views
 
 function Question(props) {
     function alternativeListCB(movie){
@@ -31,6 +32,7 @@ function Question(props) {
             </ButtonGroup>
             <Stack >
                 <Button onClick={nextQuoteRequestACB} style={props.hasSubmittedAnswer? {pointerEvents: 'none'}: null}>I just need another quote!</Button>
+                {/* TODO Disable the button instead of the above*/}
                 </Stack>
             </Stack>
         );

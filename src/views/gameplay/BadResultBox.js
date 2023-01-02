@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Alert from 'react-bootstrap/Alert';
 import {mapStateToBadResultBoxProps} from "../../features/game/gameMap";
 
+// TODO: Merge with the rest
 function BadResultBox(props) {
     return (
         <Alert variant={'danger'}>

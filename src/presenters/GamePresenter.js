@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import Question from "../pages/gameplay/Question";
-import QuoteBox from "../pages/gameplay/QuoteBox";
-import CorrectResultBox from "../pages/gameplay/CorrectResultBox";
-import BadResultBox from "../pages/gameplay/BadResultBox";
-import LoadingScreen from '../views/LoadingScreen'
-import HintView from "../pages/gameplay/HintView"
+import Question from "../views/gameplay/Question";
+import QuoteBox from "../views/gameplay/QuoteBox";
+import CorrectResultBox from "../views/gameplay/CorrectResultBox";
+import BadResultBox from "../views/gameplay/BadResultBox";
+import LoadingScreenView from '../views/LoadingScreenView'
+import HintView from "../views/gameplay/HintView"
 import {useDispatch, useSelector} from "react-redux";
 import {gameSliceAction} from "../features/game/gameSlice";
 import {fetchAndAddMoviesToStore} from "../features/game/gameApiActions";
@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
 import uploadScoreToFirebase from "../util/databaseFunctions";
 import {selectUser} from "../features/auth/authSlice";
 
+// TODO CreateAction, extraReducers? Stream line
 function GamePresenter() {
     const NUMBEROFMOVIES = 3
 
@@ -65,7 +66,7 @@ function GamePresenter() {
     return (
         <>
             {error && (`Houston, we have a problem! Tell the newbies that the ${error}`)}
-            {isLoading && <LoadingScreen/>}
+            {isLoading && <LoadingScreenView/>}
             <div>&nbsp;</div>
             {hasSubmittedAnswer
                 ? isAnswerCorrect
