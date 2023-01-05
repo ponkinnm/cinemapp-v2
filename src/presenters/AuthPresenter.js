@@ -13,34 +13,31 @@ import LoginView from "../views/LoginView";
 function AuthPresenter() {
     const [hasAccount, setHasAccount] = useState(true);
     const [error, setError] = useState("");
+    const [displayName, setDisplayName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordChecker, setPasswordChecker] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    async function checkIfUsernameAlreadyTaken(displayName, email) {
-        const dbRef = (ref(database, 'users'));
-        let checker = 0;
-        get(dbRef)
-            .then(response => {
-                if (response.hasChildren()) {
-                    checker = Object.keys(response.val()).length - 1;
-                    response.forEach((child) => {
-                        const user = child.val()
-                        if (user.username === displayName) {
-                            //ta bort skapad authentication
-                            setError("Username already taken")
-                            setHasAccount(null);
-                            deleteCurrentUser();
-                            return Promise.reject(new Error())
-                        } else if (!checker) {
-                            return writeUserToDatabase(displayName, email)
-                        }
-                        checker = checker - 1;
-                    })
-                }
-            })
-            .catch(err => {
-                //console.log(err.message)
-            })
+    async function checkIfUsernameAlreadyTaken(displayName) {
+        return new Promise((resolve, reject) => {
+            const dbRef = (ref(database, 'users'));
+            get(dbRef)
+                .then(response => {
+                    if (response.hasChildren()) {
+                        response.forEach((child) => {
+                            const user = child.val()
+                            if (user.username === displayName) {
+                                setError("Username already taken")
+                                //deleteCurrentUser();
+                                return reject({message: "Username taken"});
+                            }
+                        })
+                        return resolve();
+                    }
+                })
+        })
     }
 
     function writeUserToDatabase(displayName, email) {
@@ -52,16 +49,16 @@ function AuthPresenter() {
         }).catch(err => console.error(err.message))
     }
 
-    async function handleSignup(email, password, passwordChecker, displayName) {
+    async function handleSignup() {
         setError("");
+        if (passwordChecker !== password) {
+            setError("Passwords do not match")
+            return;
+        }
         try {
-
-            if(passwordChecker !== password){
-                setError("password must be the same")
-                return Promise.reject(new Error())
-            }
+            await checkIfUsernameAlreadyTaken(displayName, email);
             const user = await signUp(email, password, displayName);
-            await checkIfUsernameAlreadyTaken(displayName, email)
+            writeUserToDatabase(displayName, email);
             dispatch(setUser(user))
 
         } catch (err) {
@@ -80,7 +77,7 @@ function AuthPresenter() {
     }, [hasAccount])
 
 
-    async function handleLogin(email, password) {
+    async function handleLogin() {
         setError("");
         try {
             const user = await login(email, password);
@@ -96,8 +93,11 @@ function AuthPresenter() {
     }
 
     return (
-        !hasAccount ? <SignUpView setHasAccount={setHasAccount} error={error} handleSubmit={handleSignup}/> :
-            <LoginView setHasAccount={setHasAccount} error={error} handleSubmit={handleLogin}/>
+        !hasAccount ? <SignUpView setDisplayName={setDisplayName} setEmail={setEmail} setPassword={setPassword}
+                                  setPasswordChecker={setPasswordChecker} setHasAccount={setHasAccount} error={error}
+                                  handleSubmit={handleSignup}/> :
+            <LoginView setPassword={setPassword} setEmail={setEmail} setHasAccount={setHasAccount} error={error}
+                       handleSubmit={handleLogin}/>
     );
 }
 

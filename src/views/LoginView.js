@@ -1,19 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Alert, Button, Form} from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-// TODO: move state to AuthPresenter
-function LoginView({error, handleSubmit, setHasAccount}) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+function LoginView({error, handleSubmit, setHasAccount, setEmail, setPassword}) {
 
     return (
-        <>
         <div className="p-4 box">
             <h2 className="mb-3">Login</h2>
 
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={(e) => {e.preventDefault(); handleSubmit(email, password)}}>
+            <Form onSubmit={(e) => {e.preventDefault(); handleSubmit()}}>
                 <FloatingLabel label="Email" className="mb-3" controlId="formBasicEmail">
                     <Form.Control
                         required
@@ -37,7 +33,6 @@ function LoginView({error, handleSubmit, setHasAccount}) {
                 </div>
             </Form>
         </div>
-        </>
     );
 }
 

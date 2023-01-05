@@ -4,22 +4,7 @@ import React, { useState} from "react";
 import {Alert, Button, Form} from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-// have a handler function that checks if the username is already taken
-// and then deletes the currentUser and shows a error message indicating
-// username already taken, maybe have one that checks this when typing the
-// username in realtime
-// Todo: Error handling when username is taken did not work, tried many things
-// TODO: Move state to AuthPresenter
-function SignUpView({error, handleSubmit, setHasAccount}) {
-    const [email, setEmail] = useState("");
-    const [displayName, setDisplayName] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordChecker, setPasswordChecker] = useState("");
-
-    function onSubmit(e) {
-        e.preventDefault();
-        handleSubmit(email, password, passwordChecker, displayName)
-    }
+function SignUpView({error, handleSubmit, setHasAccount, setPassword, setEmail, setDisplayName, setPasswordChecker}) {
 
     return (
         <>
@@ -28,7 +13,7 @@ function SignUpView({error, handleSubmit, setHasAccount}) {
 
                 {error && <Alert variant="danger">{error}</Alert>}
 
-                <Form onSubmit={onSubmit}>
+                <Form onSubmit={(e) => {e.preventDefault(); handleSubmit()}}>
                     <Form.Group className="mb-3" controlId="displayName">
                         <FloatingLabel label="Username" className="mb-3">
                         <Form.Control
