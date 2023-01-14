@@ -18,14 +18,14 @@ function QuoteBox(props) {
                 <Card.Header>Quote</Card.Header>
                 <Card.Body>
                     <blockquote className="blockquote mb-0">
-                        <p>
+                        <div>
                         {props.lines.map(renderQuote)}
-                        </p>
+                        </div>
                         {props.characters
-                            ? <footer className="blockquote-footer">We quoted <cite>{props.characters}</cite>.</footer>
+                            ? <footer style={{margin: 0}} className="blockquote-footer">We quoted <cite>{props.characters}</cite>.</footer>
                             : null}
                         {props.year
-                            ? <footer className ="blockquote-footer">The movie was made <cite>{props.year}</cite>.</footer>
+                            ? <footer style={{margin:0}} className ="blockquote-footer">The movie was made <cite>{props.year}</cite>.</footer>
                             : null}
                     </blockquote>
                 </Card.Body>

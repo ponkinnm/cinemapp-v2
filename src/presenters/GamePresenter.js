@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {gameSliceAction} from "../features/game/gameSlice";
 import {fetchAndAddMoviesToStore} from "../features/game/gameApiActions";
 import {useNavigate} from "react-router-dom";
-import uploadScoreToFirebase from "../util/databaseFunctions";
+import {uploadScoreToFirebase} from "../util/databaseFunctions";
 import {selectUser} from "../features/auth/authSlice";
 
 // TODO CreateAction, extraReducers? Stream line

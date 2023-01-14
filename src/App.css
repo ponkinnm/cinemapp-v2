@@ -45,7 +45,7 @@ a, a:visited {
     transition: color .2s;
 }
 
-a:hover, .navigation a:hover {
+a:not(.logo):hover, .navigation a:not(.logo):hover {
     color: #666;
 }
 
@@ -54,7 +54,7 @@ a.active {
     border-bottom: 1px solid #222;
 }
 
-a.active:hover {
+a.active:not(.logo):hover {
     color: #222;
 }
 
@@ -69,10 +69,12 @@ img {
 
 .main-content {
     width: 100%;
+    max-width: min(70vw, 800px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 
 .font-accent {

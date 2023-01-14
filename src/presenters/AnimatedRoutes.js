@@ -6,7 +6,6 @@ import GenrePresenter from "./GenrePresenter";
 import NoPageView from "../views/NoPageView";
 import HighScorePresenter from "./HighScorePresenter";
 
-// TODO Open Issue - What am I? Where to put me?
 const AnimatedRoutes = () => {
     const location = useLocation();
 

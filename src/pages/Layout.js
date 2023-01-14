@@ -1,23 +1,14 @@
 import {Outlet, NavLink, Link} from "react-router-dom";
-import SignOutButton from "../SignOutButton";
-import {useDispatch, useSelector} from "react-redux";
-import {selectUser, setUser} from "../features/auth/authSlice";
-import {useEffect} from "react";
-import {onAuthStateChanged} from "firebase/auth";
-import {auth} from "../firebaseConfig";
+import {useSelector} from "react-redux";
+import {selectUser, logOut} from "../features/auth/authSlice";
 import {motion} from "framer-motion";
 
 // TODO: Review
 function Layout() {
-    const user = useSelector(selectUser);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => dispatch(setUser(user?.toJSON())))
-    }, [])
+    const user = useSelector(selectUser);
 
     return (
-
         <>
             <nav className={"navigation"}>
                 <Link className={"logo"} to="/">
@@ -33,8 +24,8 @@ function Layout() {
                         <li className={"menu__item"}>
                             <div>User:{user.displayName}</div>
                         </li>
-                        <li className={"menu__item"}>
-                            <SignOutButton/>
+                        <li style={{cursor: 'pointer'}} onClick={logOut} className={"menu__item"}>
+                            Log out
                         </li>
                         <li className={"menu__item"}>
                             <NavLink
@@ -43,8 +34,8 @@ function Layout() {
                     </>}
                 </ul>
             </nav>
-            <motion.main initial={{ opacity: 0 }}
-                         animate={{ opacity: 1 }}
+            <motion.main initial={{opacity: 0}}
+                         animate={{opacity: 1}}
                          exit={{
                              opacity: 0,
                          }}

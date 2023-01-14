@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import SignUpView from "../views/SignUpView";
-import {signUp, setUser, login, deleteCurrentUser} from "../features/auth/authSlice";
+import {signUp, setUser, login} from "../features/auth/authSlice";
 import {useNavigate} from "react-router-dom";
-import {ref, get, set} from 'firebase/database'
-import {auth} from '../firebaseConfig'
-import {database} from "../firebaseConfig";
 import {useDispatch} from "react-redux";
 import LoginView from "../views/LoginView";
+import {checkIfUsernameAlreadyTaken, writeUserToDatabase} from "../util/databaseFunctions";
 
-// TODO: Feedback from Edward "Some presenters issue persistence actions directly"
-// TODO: Firebase-Redux toolkit/box ThirdParty?
 function AuthPresenter() {
     const [hasAccount, setHasAccount] = useState(true);
     const [error, setError] = useState("");
@@ -20,34 +16,7 @@ function AuthPresenter() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    async function checkIfUsernameAlreadyTaken(displayName) {
-        return new Promise((resolve, reject) => {
-            const dbRef = (ref(database, 'users'));
-            get(dbRef)
-                .then(response => {
-                    if (response.hasChildren()) {
-                        response.forEach((child) => {
-                            const user = child.val()
-                            if (user.username === displayName) {
-                                setError("Username already taken")
-                                //deleteCurrentUser();
-                                return reject({message: "Username taken"});
-                            }
-                        })
-                        return resolve();
-                    }
-                })
-        })
-    }
 
-    function writeUserToDatabase(displayName, email) {
-        set(ref(database, 'users/' + auth.currentUser.uid), {
-            username: displayName,
-            uid: auth.currentUser.uid,
-            email: email,
-            highScore: []
-        }).catch(err => console.error(err.message))
-    }
 
     async function handleSignup() {
         setError("");
